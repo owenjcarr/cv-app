@@ -1,6 +1,6 @@
 import React from "react" ;
-import EducationSection from "./EducationSection";
-import GeneralInfoSection from "./GeneralInfoSection";
+import EducationSection from "./education/EducationSection";
+import GeneralInfoSection from "./general/GeneralSection";
 
 function CV(props) {
   const {info, editGeneralInfo, editEducationInfo} = props;

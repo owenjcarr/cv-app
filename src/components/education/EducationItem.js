@@ -1,7 +1,7 @@
 import React from "react" ;
 
-function EducationBlock(props) {
-  const {schoolName, start, end, major, gpa, edit} = props;
+function EducationItem(props) {
+  const {schoolName, start, end, major, gpa} = props;
 
   return (
     <div>
@@ -11,10 +11,9 @@ function EducationBlock(props) {
         <li>{major}</li>
         <li>{gpa}</li>
       </ul>
-      <button onClick={() => edit()}>Edit</button>
     </div>
   )
   
 }
 
-export default EducationBlock;
+export default EducationItem;

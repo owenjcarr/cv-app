@@ -1,19 +1,18 @@
 import React from "react" ;
-import EducationBlock from "./EducationBlock";
+import EducationItem from "./EducationItem";
 
 function EducationSection(props) {
-  const {info, edit} = props;
-  const educationList = info.educationInfo.educationList;
-
+  const {info} = props;
+  const educationList = info.education;
   const educationListComponents = educationList.map(education => {
     return (
-      <EducationBlock 
+      <EducationItem 
+      id = {education.id}
       schoolName = {education.schoolName}
       start = {education.start}
       end = {education.end}
       major = {education.major}
       gpa = {education.gpa}
-      edit = {edit}
       />
     )
   })
@@ -21,7 +20,6 @@ function EducationSection(props) {
   return (
     <div>
       <h1>Education</h1>
-      <button>Add</button>
       {educationListComponents}
     </div>
   )

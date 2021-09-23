@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-class Education extends Component {
+class EducationForm extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.props.onInfoChange(event);
+  handleChange(event, id) {
+    this.props.onInfoChange(event, id);
   }
 
   handleSubmit(event) {
@@ -61,4 +61,4 @@ class Education extends Component {
   }
 }
 
-export default Education;
+export default EducationForm;

@@ -1,6 +1,6 @@
 import React, { Component } from "react" ;
 
-class GeneralInfo extends Component {
+class GeneralForm extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this);
@@ -56,4 +56,4 @@ class GeneralInfo extends Component {
   }
 }
 
-export default GeneralInfo;
+export default GeneralForm;

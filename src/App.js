@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import CV from "./components/CV.js";
-import GeneralInfo from "./components/GeneralInfo.js";
-import Education from "./components/Education.js";
 import uniqid from "uniqid";
+import Form from "./components/Form.js";
 
 class App extends Component {
   constructor(props) {
@@ -15,8 +14,8 @@ class App extends Component {
         phone: "",
         display: false
       },
-      educationInfo: {
-        education: {
+      education: [
+        {
           id: uniqid(),
           schoolName: "",
           major: "",
@@ -25,15 +24,12 @@ class App extends Component {
           gpa: "",
           display: true
         },
-        educationList: []
-      },
-
+      ]
     }
     this.handleGeneralInfoChange = this.handleGeneralInfoChange.bind(this);
     this.handleEducationInfoChange = this.handleEducationInfoChange.bind(this);
     this.toggleGeneralInfoDisplay = this.toggleGeneralInfoDisplay.bind(this);
     this.toggleEducationInfoDisplay = this.toggleEducationInfoDisplay.bind(this);
-    this.handleEducationSubmit =this.handleEducationSubmit.bind(this);
   }
 
   handleGeneralInfoChange(event) {
@@ -58,7 +54,8 @@ class App extends Component {
     }))
   }
 
-  handleEducationInfoChange(event) {
+  // TODO: fix to handle new state format
+  handleEducationInfoChange(event,) {
     const {name, value} = event.target;
 
     this.setState(prevState => ({
@@ -73,63 +70,35 @@ class App extends Component {
     }))
   }
 
-  handleEducationSubmit() {
-    this.setState(prevState => ({
-      ...prevState,
-      educationInfo: {
-        educationList: this.state.educationInfo.educationList.concat(this.state.educationInfo.education),
-        education: {
-          id: uniqid(),
-          schoolName: "",
-          major: "",
-          start: "",
-          end: "",
-          gpa: "",
-          display: true
-        },
-      }
-    }));
-  }
-
+  // TODO: fix to handle new state format
   toggleEducationInfoDisplay() {
     this.setState(prevState => ({
       ...prevState,
-      education: {
-        ...prevState.education,
-        display: !this.state.educationInfo.education.display
+      educationInfo: {
+        ...prevState.educationInfo,
+        education: {
+          ...prevState.educationInfo.education,
+          display: !this.state.educationInfo.education.display
+        },
       }
     }))
   }
 
   render() {
-    console.log(this.state.educationInfo.educationList);
     return (
       <div>
-        {
-          this.state.generalInfo.display
-          ?
-            <GeneralInfo 
-              info={this.state.generalInfo}
-              onInfoChange={this.handleGeneralInfoChange}
-              onSubmit={this.toggleGeneralInfoDisplay}
-            />
-          : null
-        }
-        {
-          this.state.educationInfo.education.display
-          ?
-            <Education
-              info={this.state.educationInfo.education}
-              onInfoChange={this.handleEducationInfoChange}
-              onSubmit={this.handleEducationSubmit}
-            />
-          : null
-        }
+        <Form 
+          cvData={this.state}
+          handleGeneralInfoChange={this.handleGeneralInfoChange}
+          handleEducationInfoChange={this.handleEducationInfoChange}
+          onSubmitGeneral={this.toggleGeneralInfoDisplay}
+          onSubmitEducation={this.toggleEducationInfoDisplay}
+        />
         <CV 
           info={this.state}
           editGeneralInfo={this.toggleGeneralInfoDisplay}
           editEducationInfo={this.toggleEducationInfoDisplay}
-          />
+        />
       </div>
     );
   }
