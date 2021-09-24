@@ -6,13 +6,17 @@ function CV(props) {
   const {cvData, editGeneral, editEducation, deleteEducation, addEducation} = props;
   return (
     <div>
-      <GeneralInfoSection info={cvData} edit={editGeneral}/>
+      <GeneralInfoSection
+        info={cvData}
+        edit={editGeneral}
+      />
       <EducationSection 
         info={cvData} 
         edit={editEducation}
         deleteEducation={deleteEducation}
         addEducation={addEducation}
       />
+      {/* TODO: implement Experience Section*/}
     </div>
   )
   

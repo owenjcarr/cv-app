@@ -16,13 +16,15 @@ function Form(props) {
     />
   );
 
+  // TODO: implement experienceForm
+
   return(
     <div>
       {
-        cvData.generalInfo.display
+        cvData.general.display
         ?
           <GeneralForm
-            info={cvData.generalInfo}
+            info={cvData.general}
             onChange={onChangeGeneral}
             onSubmit={onSubmitGeneral}
           />

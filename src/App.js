@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      generalInfo: {
+      general: {
         firstName: "",
         lastName: "",
         email: "",
@@ -24,7 +24,19 @@ class App extends Component {
           gpa: "",
           display: true
         },
-      ]
+      ],
+      experience: [
+        {
+          id: uniqid(),
+          company: "",
+          location: "",
+          position: "",
+          start: "",
+          end: "",
+          description: "",
+          display: true
+        },
+      ], 
     }
     this.handleChangeGeneral = this.handleChangeGeneral.bind(this);
     this.toggleDisplayGeneral = this.toggleDisplayGeneral.bind(this);
@@ -40,8 +52,8 @@ class App extends Component {
 
     this.setState(prevState => ({
       ...prevState,
-      generalInfo: {
-        ...prevState.generalInfo,
+      general: {
+        ...prevState.general,
         [name]: value
       }
     }))
@@ -50,9 +62,9 @@ class App extends Component {
   toggleDisplayGeneral() {
     this.setState(prevState => ({
       ...prevState,
-      generalInfo: {
-        ...prevState.generalInfo,
-        display: !this.state.generalInfo.display
+      general: {
+        ...prevState.general,
+        display: !this.state.general.display
       }
     }))
   }
