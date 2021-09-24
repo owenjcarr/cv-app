@@ -27,9 +27,12 @@ class App extends Component {
       ]
     }
     this.handleChangeGeneral = this.handleChangeGeneral.bind(this);
-    this.handleChangeEducation = this.handleChangeEducation.bind(this);
     this.toggleDisplayGeneral = this.toggleDisplayGeneral.bind(this);
+
+    this.handleChangeEducation = this.handleChangeEducation.bind(this);
     this.toggleDisplayEducation = this.toggleDisplayEducation.bind(this);
+    this.addEducation = this.addEducation.bind(this);
+    this.deleteEducation = this.deleteEducation.bind(this);
   }
 
   handleChangeGeneral(event) {
@@ -81,6 +84,17 @@ class App extends Component {
 
   }
 
+  addEducation() {
+
+  }
+  
+  deleteEducation(id) {
+    this.setState(prevState => {
+      const updatedEducation = prevState.education.filter(education => education.id !== id);
+      return {...prevState, education: [...updatedEducation]};
+    })
+  }
+
   render() {
     return (
       <div>
@@ -95,6 +109,7 @@ class App extends Component {
           cvData={this.state}
           editGeneral={this.toggleDisplayGeneral}
           editEducation={this.toggleDisplayEducation}
+          deleteEducation={this.deleteEducation}
         />
       </div>
     );

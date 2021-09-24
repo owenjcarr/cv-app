@@ -1,7 +1,7 @@
 import React from "react" ;
 
 function EducationItem(props) {
-  const {id, schoolName, start, end, major, gpa, display, edit} = props;
+  const {id, schoolName, start, end, major, gpa, display, edit, deleteEducation} = props;
 
   return (
     <div>
@@ -12,6 +12,7 @@ function EducationItem(props) {
         <li>{gpa}</li>
       </ul>
       {display ? null : <button onClick={() => edit(id)}>Edit</button>}
+      <button onClick={() => deleteEducation(id)}>Delete</button>
     </div>
   )
   

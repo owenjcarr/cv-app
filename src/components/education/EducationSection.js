@@ -2,7 +2,7 @@ import React from "react" ;
 import EducationItem from "./EducationItem";
 
 function EducationSection(props) {
-  const {info, edit} = props;
+  const {info, edit, deleteEducation} = props;
   const educationList = info.education;
   const educationListComponents = educationList.map(education => {
     return (
@@ -16,6 +16,7 @@ function EducationSection(props) {
         gpa = {education.gpa}
         display = {education.display}
         edit = {edit}
+        deleteEducation = {deleteEducation}
       />
     )
   })
