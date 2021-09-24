@@ -29,7 +29,8 @@ class App extends Component {
         {
           id: uniqid(),
           company: "",
-          location: "",
+          city: "",
+          state: "",
           position: "",
           start: "",
           end: "",
@@ -45,6 +46,11 @@ class App extends Component {
     this.toggleDisplayEducation = this.toggleDisplayEducation.bind(this);
     this.addEducation = this.addEducation.bind(this);
     this.deleteEducation = this.deleteEducation.bind(this);
+
+    this.handleChangeExperience = this.handleChangeExperience.bind(this);
+    this.toggleDisplayExperience = this.toggleDisplayExperience.bind(this);
+    this.addExperience = this.addExperience.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
   }
 
   handleChangeGeneral(event) {
@@ -118,6 +124,58 @@ class App extends Component {
     })
   }
 
+  handleChangeExperience(event, id) {
+    const {name, value} = event.target;
+    this.setState(prevState => {
+      const updatedExperience = prevState.experience.map(experience => {
+        if (experience.id === id) {
+          return {...experience, [name] : value }
+        }
+        return experience
+      })
+      return {...prevState, experience: [...updatedExperience]} 
+    })
+
+  }
+
+  toggleDisplayExperience(id) {
+    this.setState(prevState => {
+      const updatedExperience = prevState.experience.map(experience => {
+        if (experience.id === id) {
+          return {...experience, display: !experience.display }
+        }
+        return experience
+      })
+      return {...prevState, experience: [...updatedExperience]} 
+    })
+
+  }
+
+  addExperience() {
+    const newExperience = {
+      id: uniqid(),
+      company: "",
+      city: "",
+      state: "",
+      position: "",
+      start: "",
+      end: "",
+      description: "",
+      display: true
+    }
+    this.setState(prevState => {
+      return {...prevState, experience: [...prevState.experience, newExperience]}
+    })
+  }
+  
+  deleteExperience(id) {
+    this.setState(prevState => {
+      const updatedExperience = prevState.experience.filter(experience => experience.id !== id);
+      return {...prevState, education: [...updatedExperience]}
+    })
+  }
+
+
   render() {
     return (
       <div>
@@ -125,8 +183,10 @@ class App extends Component {
           cvData={this.state}
           onChangeGeneral={this.handleChangeGeneral}
           onChangeEducation={this.handleChangeEducation}
+          onChangeExperience={this.handleChangeExperience}
           onSubmitGeneral={this.toggleDisplayGeneral}
           onSubmitEducation={this.toggleDisplayEducation}
+          onSubmitExperience={this.toggleDisplayExperience}
         />
         <CV 
           cvData={this.state}
@@ -134,6 +194,9 @@ class App extends Component {
           editEducation={this.toggleDisplayEducation}
           deleteEducation={this.deleteEducation}
           addEducation={this.addEducation}
+          editExperience={this.toggleDisplayExperience}
+          deleteExperience={this.deleteExperience}
+          addExperience={this.addExperience}
         />
       </div>
     );

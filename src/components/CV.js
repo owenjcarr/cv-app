@@ -1,9 +1,10 @@
 import React from "react" ;
 import EducationSection from "./education/EducationSection";
+import ExperienceSection from "./experience/ExperienceSection";
 import GeneralInfoSection from "./general/GeneralSection";
 
 function CV(props) {
-  const {cvData, editGeneral, editEducation, deleteEducation, addEducation} = props;
+  const {cvData, editGeneral, editEducation, deleteEducation, addEducation, editExperience, deleteExperience, addExperience} = props;
   return (
     <div>
       <GeneralInfoSection
@@ -16,7 +17,12 @@ function CV(props) {
         deleteEducation={deleteEducation}
         addEducation={addEducation}
       />
-      {/* TODO: implement Experience Section*/}
+      <ExperienceSection 
+        info={cvData} 
+        edit={editExperience}
+        deleteExperience={deleteExperience}
+        addExperience={addExperience}
+      />
     </div>
   )
   
