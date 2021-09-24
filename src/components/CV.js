@@ -3,7 +3,7 @@ import EducationSection from "./education/EducationSection";
 import GeneralInfoSection from "./general/GeneralSection";
 
 function CV(props) {
-  const {cvData, editGeneral, editEducation, deleteEducation} = props;
+  const {cvData, editGeneral, editEducation, deleteEducation, addEducation} = props;
   return (
     <div>
       <GeneralInfoSection info={cvData} edit={editGeneral}/>
@@ -11,6 +11,7 @@ function CV(props) {
         info={cvData} 
         edit={editEducation}
         deleteEducation={deleteEducation}
+        addEducation={addEducation}
       />
     </div>
   )

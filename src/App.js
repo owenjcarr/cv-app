@@ -85,13 +85,24 @@ class App extends Component {
   }
 
   addEducation() {
-
+    const newEducation = {
+      id: uniqid(),
+      schoolName: "",
+      major: "",
+      start: "",
+      end: "",
+      gpa: "",
+      display: true
+    }
+    this.setState(prevState => {
+      return {...prevState, education: [...prevState.education, newEducation]}
+    })
   }
   
   deleteEducation(id) {
     this.setState(prevState => {
       const updatedEducation = prevState.education.filter(education => education.id !== id);
-      return {...prevState, education: [...updatedEducation]};
+      return {...prevState, education: [...updatedEducation]}
     })
   }
 
@@ -110,6 +121,7 @@ class App extends Component {
           editGeneral={this.toggleDisplayGeneral}
           editEducation={this.toggleDisplayEducation}
           deleteEducation={this.deleteEducation}
+          addEducation={this.addEducation}
         />
       </div>
     );
