@@ -12,7 +12,7 @@ class App extends Component {
         lastName: "",
         email: "",
         phone: "",
-        display: false
+        display: true
       },
       education: [
         {
@@ -26,13 +26,13 @@ class App extends Component {
         },
       ]
     }
-    this.handleGeneralInfoChange = this.handleGeneralInfoChange.bind(this);
-    this.handleEducationInfoChange = this.handleEducationInfoChange.bind(this);
-    this.toggleGeneralInfoDisplay = this.toggleGeneralInfoDisplay.bind(this);
-    this.toggleEducationInfoDisplay = this.toggleEducationInfoDisplay.bind(this);
+    this.handleChangeGeneral = this.handleChangeGeneral.bind(this);
+    this.handleChangeEducation = this.handleChangeEducation.bind(this);
+    this.toggleDisplayGeneral = this.toggleDisplayGeneral.bind(this);
+    this.toggleDisplayEducation = this.toggleDisplayEducation.bind(this);
   }
 
-  handleGeneralInfoChange(event) {
+  handleChangeGeneral(event) {
     const {name, value} = event.target;
 
     this.setState(prevState => ({
@@ -44,7 +44,7 @@ class App extends Component {
     }))
   }
 
-  toggleGeneralInfoDisplay() {
+  toggleDisplayGeneral() {
     this.setState(prevState => ({
       ...prevState,
       generalInfo: {
@@ -54,34 +54,31 @@ class App extends Component {
     }))
   }
 
-  // TODO: fix to handle new state format
-  handleEducationInfoChange(event,) {
+  handleChangeEducation(event, id) {
     const {name, value} = event.target;
+    this.setState(prevState => {
+      const updatedEducation = prevState.education.map(education => {
+        if (education.id === id) {
+          return {...education, [name] : value }
+        }
+        return education
+      })
+      return {...prevState, education: [...updatedEducation]} 
+    })
 
-    this.setState(prevState => ({
-      ...prevState,
-      educationInfo: {
-        ...prevState.educationInfo,
-        education: {
-          ...prevState.educationInfo.education,
-          [name]: value
-        },
-      }
-    }))
   }
 
-  // TODO: fix to handle new state format
-  toggleEducationInfoDisplay() {
-    this.setState(prevState => ({
-      ...prevState,
-      educationInfo: {
-        ...prevState.educationInfo,
-        education: {
-          ...prevState.educationInfo.education,
-          display: !this.state.educationInfo.education.display
-        },
-      }
-    }))
+  toggleDisplayEducation(id) {
+    this.setState(prevState => {
+      const updatedEducation = prevState.education.map(education => {
+        if (education.id === id) {
+          return {...education, display: !education.display }
+        }
+        return education
+      })
+      return {...prevState, education: [...updatedEducation]} 
+    })
+
   }
 
   render() {
@@ -89,15 +86,15 @@ class App extends Component {
       <div>
         <Form 
           cvData={this.state}
-          handleGeneralInfoChange={this.handleGeneralInfoChange}
-          handleEducationInfoChange={this.handleEducationInfoChange}
-          onSubmitGeneral={this.toggleGeneralInfoDisplay}
-          onSubmitEducation={this.toggleEducationInfoDisplay}
+          onChangeGeneral={this.handleChangeGeneral}
+          onChangeEducation={this.handleChangeEducation}
+          onSubmitGeneral={this.toggleDisplayGeneral}
+          onSubmitEducation={this.toggleDisplayEducation}
         />
         <CV 
-          info={this.state}
-          editGeneralInfo={this.toggleGeneralInfoDisplay}
-          editEducationInfo={this.toggleEducationInfoDisplay}
+          cvData={this.state}
+          editGeneral={this.toggleDisplayGeneral}
+          editEducation={this.toggleDisplayEducation}
         />
       </div>
     );

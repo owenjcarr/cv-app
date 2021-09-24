@@ -8,7 +8,7 @@ class GeneralForm extends Component {
   }
 
   handleChange(event) {
-    this.props.onInfoChange(event);
+    this.props.onChange(event);
   }
 
   handleSubmit(event) {

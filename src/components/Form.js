@@ -3,14 +3,16 @@ import GeneralForm from "./general/GeneralForm.js";
 import EducationForm from "./education/EducationForm.js";
 
 function Form(props) {
-  const { cvData, handleGeneralInfoChange, handleEducationInfoChange, onSubmitGeneral, onSubmitEductaion } = props;
+  const { cvData, onChangeGeneral, onChangeEducation, onSubmitGeneral, onSubmitEducation } = props;
   
+  console.log(props);
+
   const educationForms = cvData.education.filter(education => education.display).map(education => 
     <EducationForm
       key={education.id}
       info={education}
-      onInfoChange={handleEducationInfoChange}
-      onSubmit={onSubmitEductaion}
+      onChange={onChangeEducation}
+      onSubmit={onSubmitEducation}
     />
   );
 
@@ -21,7 +23,7 @@ function Form(props) {
         ?
           <GeneralForm
             info={cvData.generalInfo}
-            onInfoChange={handleGeneralInfoChange}
+            onChange={onChangeGeneral}
             onSubmit={onSubmitGeneral}
           />
         : null

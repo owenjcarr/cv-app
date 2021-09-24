@@ -11,7 +11,7 @@ function GeneralInfoSection(props) {
         <li>{generalInfo.email}</li>
         <li>{generalInfo.phone}</li>
       </ul>
-      {info.display ? null : <button onClick={() => edit()}>Edit</button>}
+      {generalInfo.display ? null : <button onClick={() => edit()}>Edit</button>}
     </div>
   )
   

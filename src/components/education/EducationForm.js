@@ -7,17 +7,18 @@ class EducationForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event, id) {
-    this.props.onInfoChange(event, id);
+  handleChange(event) {
+    this.props.onChange(event, this.props.info.id);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit();
+    this.props.onSubmit(this.props.info.id);
   }
 
   render() {
     const { info } = this.props;
+    console.log(this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <input 
