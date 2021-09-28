@@ -25,8 +25,10 @@ function ExperienceSection(props) {
 
   return (
     <div>
-      <h1>Experience</h1>
-      <button onClick={() => addExperience()}>Add</button>
+      <div className="exp-header">
+        <h1>Experience</h1>
+        <button onClick={() => addExperience()}>Add</button>
+      </div>
       {educationListComponents}
     </div>
   )

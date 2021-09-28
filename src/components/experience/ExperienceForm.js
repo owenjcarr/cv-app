@@ -20,13 +20,13 @@ class ExperienceForm extends Component {
     const { info } = this.props;
     return(
       <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          placeholder="Company"
-          name="company"
-          value={info.company}
-          onChange={this.handleChange}
-        />
+          <input
+            type="text"
+            placeholder="Company"
+            name="company"
+            value={info.company}
+            onChange={this.handleChange}
+          />
         <input
           type="text"
           placeholder="City"

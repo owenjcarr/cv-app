@@ -22,7 +22,7 @@ class App extends Component {
           start: "",
           end: "",
           gpa: "",
-          display: true
+          display: false
         },
       ],
       experience: [
@@ -35,7 +35,7 @@ class App extends Component {
           start: "",
           end: "",
           description: "",
-          display: true
+          display: false
         },
       ], 
     }
@@ -171,7 +171,7 @@ class App extends Component {
   deleteExperience(id) {
     this.setState(prevState => {
       const updatedExperience = prevState.experience.filter(experience => experience.id !== id);
-      return {...prevState, education: [...updatedExperience]}
+      return {...prevState, experience: [...updatedExperience]}
     })
   }
 

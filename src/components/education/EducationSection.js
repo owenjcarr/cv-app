@@ -23,8 +23,10 @@ function EducationSection(props) {
 
   return (
     <div>
-      <h1>Education</h1>
-      <button onClick={() => addEducation()}>Add</button>
+      <div className="edu-header">
+        <h1>Education</h1>
+        <button onClick={() => addEducation()}>Add</button>
+      </div>
       {educationListComponents}
     </div>
   )

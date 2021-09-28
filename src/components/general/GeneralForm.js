@@ -19,15 +19,16 @@ class GeneralForm extends Component {
   render() {
     const { info } = this.props;
     return (
-      <div>
+      <div className="form-box">
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="First Name"
-            name="firstName"
-            value={info.firstName}
-            onChange={this.handleChange}
-          />
+          <label>Enter General Info</label>
+            <input
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+              value={info.firstName}
+              onChange={this.handleChange}
+            />
           <input 
             type="text"
             placeholder="Last Name"
