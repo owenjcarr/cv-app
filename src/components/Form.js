@@ -25,7 +25,7 @@ function Form(props) {
   );
 
   return(
-    <div>
+    <div className="form">
       {
         cvData.general.display
         ?

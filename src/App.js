@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CV from "./components/CV.js";
 import uniqid from "uniqid";
 import Form from "./components/Form.js";
+import Header from "./components/Header.js";
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class App extends Component {
           start: "",
           end: "",
           gpa: "",
-          display: false
+          display: true
         },
       ],
       experience: [
@@ -37,7 +38,7 @@ class App extends Component {
           description: "",
           display: false
         },
-      ], 
+      ],
     }
     this.handleChangeGeneral = this.handleChangeGeneral.bind(this);
     this.toggleDisplayGeneral = this.toggleDisplayGeneral.bind(this);
@@ -54,7 +55,7 @@ class App extends Component {
   }
 
   handleChangeGeneral(event) {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
 
     this.setState(prevState => ({
       ...prevState,
@@ -76,15 +77,15 @@ class App extends Component {
   }
 
   handleChangeEducation(event, id) {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     this.setState(prevState => {
       const updatedEducation = prevState.education.map(education => {
         if (education.id === id) {
-          return {...education, [name] : value }
+          return { ...education, [name]: value }
         }
         return education
       })
-      return {...prevState, education: [...updatedEducation]} 
+      return { ...prevState, education: [...updatedEducation] }
     })
 
   }
@@ -93,11 +94,11 @@ class App extends Component {
     this.setState(prevState => {
       const updatedEducation = prevState.education.map(education => {
         if (education.id === id) {
-          return {...education, display: !education.display }
+          return { ...education, display: !education.display }
         }
         return education
       })
-      return {...prevState, education: [...updatedEducation]} 
+      return { ...prevState, education: [...updatedEducation] }
     })
 
   }
@@ -113,27 +114,27 @@ class App extends Component {
       display: true
     }
     this.setState(prevState => {
-      return {...prevState, education: [...prevState.education, newEducation]}
+      return { ...prevState, education: [...prevState.education, newEducation] }
     })
   }
-  
+
   deleteEducation(id) {
     this.setState(prevState => {
       const updatedEducation = prevState.education.filter(education => education.id !== id);
-      return {...prevState, education: [...updatedEducation]}
+      return { ...prevState, education: [...updatedEducation] }
     })
   }
 
   handleChangeExperience(event, id) {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     this.setState(prevState => {
       const updatedExperience = prevState.experience.map(experience => {
         if (experience.id === id) {
-          return {...experience, [name] : value }
+          return { ...experience, [name]: value }
         }
         return experience
       })
-      return {...prevState, experience: [...updatedExperience]} 
+      return { ...prevState, experience: [...updatedExperience] }
     })
 
   }
@@ -142,11 +143,11 @@ class App extends Component {
     this.setState(prevState => {
       const updatedExperience = prevState.experience.map(experience => {
         if (experience.id === id) {
-          return {...experience, display: !experience.display }
+          return { ...experience, display: !experience.display }
         }
         return experience
       })
-      return {...prevState, experience: [...updatedExperience]} 
+      return { ...prevState, experience: [...updatedExperience] }
     })
 
   }
@@ -164,14 +165,14 @@ class App extends Component {
       display: true
     }
     this.setState(prevState => {
-      return {...prevState, experience: [...prevState.experience, newExperience]}
+      return { ...prevState, experience: [...prevState.experience, newExperience] }
     })
   }
-  
+
   deleteExperience(id) {
     this.setState(prevState => {
       const updatedExperience = prevState.experience.filter(experience => experience.id !== id);
-      return {...prevState, experience: [...updatedExperience]}
+      return { ...prevState, experience: [...updatedExperience] }
     })
   }
 
@@ -179,25 +180,32 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Form 
-          cvData={this.state}
-          onChangeGeneral={this.handleChangeGeneral}
-          onChangeEducation={this.handleChangeEducation}
-          onChangeExperience={this.handleChangeExperience}
-          onSubmitGeneral={this.toggleDisplayGeneral}
-          onSubmitEducation={this.toggleDisplayEducation}
-          onSubmitExperience={this.toggleDisplayExperience}
-        />
-        <CV 
-          cvData={this.state}
-          editGeneral={this.toggleDisplayGeneral}
-          editEducation={this.toggleDisplayEducation}
-          deleteEducation={this.deleteEducation}
-          addEducation={this.addEducation}
-          editExperience={this.toggleDisplayExperience}
-          deleteExperience={this.deleteExperience}
-          addExperience={this.addExperience}
-        />
+        <Header />
+        <div className="main-content">
+          <div className="cv-container">
+            <CV
+              cvData={this.state}
+              editGeneral={this.toggleDisplayGeneral}
+              editEducation={this.toggleDisplayEducation}
+              deleteEducation={this.deleteEducation}
+              addEducation={this.addEducation}
+              editExperience={this.toggleDisplayExperience}
+              deleteExperience={this.deleteExperience}
+              addExperience={this.addExperience}
+            />
+          </div>
+          <div className="form-container">
+            <Form
+              cvData={this.state}
+              onChangeGeneral={this.handleChangeGeneral}
+              onChangeEducation={this.handleChangeEducation}
+              onChangeExperience={this.handleChangeExperience}
+              onSubmitGeneral={this.toggleDisplayGeneral}
+              onSubmitEducation={this.toggleDisplayEducation}
+              onSubmitExperience={this.toggleDisplayExperience}
+            />
+          </div>
+        </div>
       </div>
     );
   }

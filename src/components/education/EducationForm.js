@@ -18,9 +18,8 @@ class EducationForm extends Component {
 
   render() {
     const { info } = this.props;
-    console.log(this.props)
     return (
-      <form class="form-box" onSubmit={this.handleSubmit}>
+      <form className="form-box" onSubmit={this.handleSubmit}>
         <label>Enter Education</label>
         <input 
           type="text"

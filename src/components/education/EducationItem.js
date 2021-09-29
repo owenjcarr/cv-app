@@ -12,7 +12,7 @@ function EducationItem(props) {
         <li>{gpa}</li>
       </ul>
       {display ? null : <button onClick={() => edit(id)}>Edit</button>}
-      <button onClick={() => deleteEducation(id)}>Delete</button>
+      <button className="delete-button" onClick={() => deleteEducation(id)}>Delete</button>
     </div>
   )
   

@@ -10,7 +10,7 @@ function ExperienceItem(props) {
       <p>{city}, {state}</p>
       <p>{description}</p>
       {display ? null : <button onClick={() => edit(id)}>Edit</button>}
-      <button onClick={() => deleteExperience(id)}>Delete</button>
+      <button className="delete-button"  onClick={() => deleteExperience(id)}>Delete</button>
     </div>
   )
 }

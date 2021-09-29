@@ -6,7 +6,7 @@ import GeneralInfoSection from "./general/GeneralSection";
 function CV(props) {
   const {cvData, editGeneral, editEducation, deleteEducation, addEducation, editExperience, deleteExperience, addExperience} = props;
   return (
-    <div>
+    <div className="cv">
       <GeneralInfoSection
         info={cvData}
         edit={editGeneral}
