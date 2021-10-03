@@ -1,63 +1,51 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import CV from "./components/CV.js";
 import uniqid from "uniqid";
 import Form from "./components/Form.js";
 import Header from "./components/Header.js";
+import "./styles.css"
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      general: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
+const App = () =>  {
+  const cvData = {
+    general: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      display: true
+    },
+    education: [
+      {
+        id: uniqid(),
+        schoolName: "",
+        major: "",
+        start: "",
+        end: "",
+        gpa: "",
         display: true
       },
-      education: [
-        {
-          id: uniqid(),
-          schoolName: "",
-          major: "",
-          start: "",
-          end: "",
-          gpa: "",
-          display: true
-        },
-      ],
-      experience: [
-        {
-          id: uniqid(),
-          company: "",
-          city: "",
-          state: "",
-          position: "",
-          start: "",
-          end: "",
-          description: "",
-          display: false
-        },
-      ],
-    }
-    this.handleChangeGeneral = this.handleChangeGeneral.bind(this);
-    this.toggleDisplayGeneral = this.toggleDisplayGeneral.bind(this);
-
-    this.handleChangeEducation = this.handleChangeEducation.bind(this);
-    this.toggleDisplayEducation = this.toggleDisplayEducation.bind(this);
-    this.addEducation = this.addEducation.bind(this);
-    this.deleteEducation = this.deleteEducation.bind(this);
-
-    this.handleChangeExperience = this.handleChangeExperience.bind(this);
-    this.toggleDisplayExperience = this.toggleDisplayExperience.bind(this);
-    this.addExperience = this.addExperience.bind(this);
-    this.deleteExperience = this.deleteExperience.bind(this);
+    ],
+    experience: [
+      {
+        id: uniqid(),
+        company: "",
+        city: "",
+        state: "",
+        position: "",
+        start: "",
+        end: "",
+        description: "",
+        display: false
+      },
+    ],
   }
 
-  handleChangeGeneral(event) {
+  const [cv, setCv] = useState(cvData);
+
+  const handleChangeGeneral = (event) => {
     const { name, value } = event.target;
 
-    this.setState(prevState => ({
+    setCv(prevState => ({
       ...prevState,
       general: {
         ...prevState.general,
@@ -66,19 +54,20 @@ class App extends Component {
     }))
   }
 
-  toggleDisplayGeneral() {
-    this.setState(prevState => ({
+  const toggleDisplayGeneral = () => {
+    setCv(prevState => ({
       ...prevState,
       general: {
         ...prevState.general,
-        display: !this.state.general.display
+        display: !cv.general.display
       }
     }))
   }
 
-  handleChangeEducation(event, id) {
+  const handleChangeEducation = (event, id) => {
     const { name, value } = event.target;
-    this.setState(prevState => {
+
+    setCv(prevState => {
       const updatedEducation = prevState.education.map(education => {
         if (education.id === id) {
           return { ...education, [name]: value }
@@ -90,8 +79,8 @@ class App extends Component {
 
   }
 
-  toggleDisplayEducation(id) {
-    this.setState(prevState => {
+  const toggleDisplayEducation = (id) => {
+    setCv(prevState => {
       const updatedEducation = prevState.education.map(education => {
         if (education.id === id) {
           return { ...education, display: !education.display }
@@ -103,7 +92,7 @@ class App extends Component {
 
   }
 
-  addEducation() {
+  const addEducation = () => {
     const newEducation = {
       id: uniqid(),
       schoolName: "",
@@ -113,21 +102,22 @@ class App extends Component {
       gpa: "",
       display: true
     }
-    this.setState(prevState => {
+    setCv(prevState => {
       return { ...prevState, education: [...prevState.education, newEducation] }
     })
   }
 
-  deleteEducation(id) {
-    this.setState(prevState => {
+  const deleteEducation = (id) => {
+    setCv(prevState => {
       const updatedEducation = prevState.education.filter(education => education.id !== id);
       return { ...prevState, education: [...updatedEducation] }
     })
   }
 
-  handleChangeExperience(event, id) {
+  const handleChangeExperience = (event, id) => {
     const { name, value } = event.target;
-    this.setState(prevState => {
+
+    setCv(prevState => {
       const updatedExperience = prevState.experience.map(experience => {
         if (experience.id === id) {
           return { ...experience, [name]: value }
@@ -139,8 +129,8 @@ class App extends Component {
 
   }
 
-  toggleDisplayExperience(id) {
-    this.setState(prevState => {
+  const toggleDisplayExperience = (id) => {
+    setCv(prevState => {
       const updatedExperience = prevState.experience.map(experience => {
         if (experience.id === id) {
           return { ...experience, display: !experience.display }
@@ -152,7 +142,7 @@ class App extends Component {
 
   }
 
-  addExperience() {
+  const addExperience = () => {
     const newExperience = {
       id: uniqid(),
       company: "",
@@ -164,51 +154,49 @@ class App extends Component {
       description: "",
       display: true
     }
-    this.setState(prevState => {
+    setCv(prevState => {
       return { ...prevState, experience: [...prevState.experience, newExperience] }
     })
   }
 
-  deleteExperience(id) {
-    this.setState(prevState => {
+  const deleteExperience = (id) => {
+    setCv(prevState => {
       const updatedExperience = prevState.experience.filter(experience => experience.id !== id);
       return { ...prevState, experience: [...updatedExperience] }
     })
   }
 
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <div className="main-content">
-          <div className="cv-container">
-            <CV
-              cvData={this.state}
-              editGeneral={this.toggleDisplayGeneral}
-              editEducation={this.toggleDisplayEducation}
-              deleteEducation={this.deleteEducation}
-              addEducation={this.addEducation}
-              editExperience={this.toggleDisplayExperience}
-              deleteExperience={this.deleteExperience}
-              addExperience={this.addExperience}
-            />
-          </div>
-          <div className="form-container">
-            <Form
-              cvData={this.state}
-              onChangeGeneral={this.handleChangeGeneral}
-              onChangeEducation={this.handleChangeEducation}
-              onChangeExperience={this.handleChangeExperience}
-              onSubmitGeneral={this.toggleDisplayGeneral}
-              onSubmitEducation={this.toggleDisplayEducation}
-              onSubmitExperience={this.toggleDisplayExperience}
-            />
-          </div>
+  return (
+    <div>
+      <Header />
+      <div className="main-content">
+        <div className="cv-container">
+          <CV
+            cvData={cv}
+            editGeneral={toggleDisplayGeneral}
+            editEducation={toggleDisplayEducation}
+            deleteEducation={deleteEducation}
+            addEducation={addEducation}
+            editExperience={toggleDisplayExperience}
+            deleteExperience={deleteExperience}
+            addExperience={addExperience}
+          />
+        </div>
+        <div className="form-container">
+          <Form
+            cvData={cv}
+            onChangeGeneral={handleChangeGeneral}
+            onChangeEducation={handleChangeEducation}
+            onChangeExperience={handleChangeExperience}
+            onSubmitGeneral={toggleDisplayGeneral}
+            onSubmitEducation={toggleDisplayEducation}
+            onSubmitExperience={toggleDisplayExperience}
+          />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 
 export default App;
